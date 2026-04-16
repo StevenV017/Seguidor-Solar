@@ -27,6 +27,7 @@ El sistema resuelve el problema de la pérdida de eficiencia en paneles solares 
 
   1. Clonar el repositorio:
      
+     git clone https://github.com/StevenV017/Seguidor-Solar.git
   3. Conexión de hardware:
        - Servos: Conectar a los pines digitales D9 (azimut) y D10 (elevación).
        - LDRs: Configurar en puentes divisores hacia los pines analógicos A0, A1, A2 y A3.
@@ -39,10 +40,38 @@ El sistema resuelve el problema de la pérdida de eficiencia en paneles solares 
 
 Una vez cargado el código y alimentado el sistema:
   
-  1. El sistema realizará un centrado inicial de los servos a 90º.
+  1. El sistema centrará inicialmente los servos a 90º.
   2. Al detectar una fuente de luz, el panel se moverá grado a grado hacia el lado con mayor lectura.
-  3. Tolerancia: El sistema ignora diferencias menores a 10 unidades para evitar vibraciones constantes.
+  3. Tolerancia: El sistema ignora diferencias inferiores a 10 unidades para evitar vibraciones constantes.
 
 **Estructura del proyecto**
 
-
+```
+/Seguidor-Solar
+│
+├── /src                    		  # Código fuente del proyecto
+│   ├── Seguidor_Solar.ino  	      # Archivo principal de código (Arduino)
+│   └── Codigo.txt               	  #Código en texto plano
+│
+├── /docs                   		  # Documentación técnica y visual
+│   ├── /diagramas          	      # Diagramas exportados
+│   │   ├── Diagrama_pictorico.png
+│   │   ├── Diagrama_esquematico.png
+│   │   ├── Diagrama_flujo.png
+│   │   └── Diagrama_bloques.png
+│   ├── /manuales           	      # Guías de usuario o instalación
+│   │   ├── ArduinoUno_datasheet.pdf
+│   │   ├── SG90_datasheet.pdf
+│   └─└── LDR_datasheet.pdf
+│
+├── /simulacion             	      # Archivos de software de simulación
+│   └── Seguidor_solar.pdsprj
+│
+├── /hardware               	      # Archivos de diseño físico
+│   └── diseño_eléctrico.brd
+│
+├── Documentacion.pdf               
+│
+└── README.md
+```
+Para más información consultar Documentación.pdf
