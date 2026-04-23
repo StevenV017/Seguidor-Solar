@@ -1,0 +1,105 @@
+#include <Servo.h>
+
+//Pines de servomotores
+#define pinServoAzimut 9
+#define pinServoElevacion 10
+
+//Pines de LDR's
+#define LDR_UL A0
+#define LDR_UR A1
+#define LDR_LL A2
+#define LDR_LR A3
+
+//Definicion de servomotores
+Servo Azimut;
+Servo Elevacion;
+
+//Declaración de variables de inclinación para los servos
+int valorAzimut = 90;
+int valorElevacion = 90;
+
+//Ajuste de sensibilidad
+int tolerancia = 10;
+int umbralNoche = 100;
+
+void setup() {
+  //Asignar pin a los servos
+  Azimut.attach(pinServoAzimut);
+  Elevacion.attach(pinServoElevacion);
+
+  //Posicionar servos al centro justo al encender
+  Azimut.write(valorAzimut);
+  Elevacion.write(valorElevacion);
+  
+  delay(500);
+}
+
+void loop() {
+  //Leer los valores de los LDR's
+  int LDR1 = analogRead(LDR_UL);
+  int LDR2 = analogRead(LDR_UR);
+  int LDR3 = analogRead(LDR_LL);
+  int LDR4 = analogRead(LDR_LR);
+  
+  //Verificar si hay suficiente luz para operar
+  int luzTotal = LDR1 + LDR2 + LDR3 + LDR4;
+
+  if (luzTotal < umbralNoche){
+    estacionarPanel(); //Si esta muy oscuro el panel entra en suspensión en una posición estandar
+    delay(5000);
+  }else{
+      //Luz percibida por cada dirección
+    int luzAzimutNegativa = LDR1 + LDR3;
+    int luzAzimutPositiva = LDR2 + LDR4;
+
+    int luzElevacionNegativa = LDR3 + LDR4;
+    int luzElevacionPositiva = LDR1 +LDR2;
+
+    //Control de giro horizontal (sobre el azimut)
+    if (luzAzimutNegativa > (luzAzimutPositiva + tolerancia)){
+      if (valorAzimut > 0){
+        valorAzimut--;
+      }
+    }else if (luzAzimutPositiva > (luzAzimutNegativa + tolerancia)){
+      if (valorAzimut < 180){
+        valorAzimut++;
+      }
+    }
+    Azimut.write(valorAzimut); //Ajustar el azimut
+
+    //Control de elevación
+    if (luzElevacionNegativa > (luzElevacionPositiva + tolerancia)){
+      if (valorElevacion > 45){
+        valorElevacion--;
+      }
+    }else if (luzElevacionPositiva > (luzElevacionNegativa + tolerancia)){
+      if (valorElevacion < 135){
+        valorElevacion++;
+      }
+    }
+    Elevacion.write(valorElevacion); //Ajusta la elevacion
+
+    delay (50);
+  }
+
+}
+
+//Modo de suspensión en posición entandar (90,90)
+  void estacionarPanel(){
+    while (valorAzimut != 90 || valorElevacion != 90) {
+      if (valorAzimut < 90){
+        valorAzimut++;
+      }else if (valorAzimut > 90){
+        valorAzimut--;
+      }
+      if (valorElevacion < 90){
+        valorElevacion++;
+      }else if (valorElevacion > 90){
+        valorElevacion--;
+      }
+
+      Azimut.write(valorAzimut);
+      Elevacion.write(valorElevacion);
+      delay(30); // Velocidad del movimiento de estacionamiento
+    }
+  }
