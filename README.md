@@ -50,8 +50,8 @@ Una vez cargado el código y alimentado el sistema:
 /Seguidor-Solar
 │
 ├── /src                    		  # Código fuente del proyecto
-│   ├── /Seguidor_solar 	        # Archivo principal de código (Arduino)
-│       └── Seguidor_Solar.ino
+│   ├── /Seguidor_solar 	          # Archivo principal de código (Arduino)
+│   │   └── Seguidor_Solar.ino
 │   └── Codigo.txt               	  #Código en texto plano
 │
 ├── /docs                   		  # Documentación técnica y visual
