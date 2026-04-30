@@ -5,7 +5,7 @@ Este proyecto consiste en un sistema de control de lazo cerrado basado en el mic
 
 El sistema resuelve el problema de la pérdida de eficiencia en paneles solares estáticos utilizando:
 
-  - Detección: Uso de 4 fotorresistencias (LDR) colocadas en los cuatro extremos para medir la incidencia de luz.
+  - Detección: Uso de 4 fotorresistencias (LDR) para medir la incidencia de luz.
   - Procesamiento: Un algoritmo en C++ que calcula promedios diferenciales para determinar la dirección del sol.
   - Actuación: Dos servomotores SG90 que ajustan la posición de la base en los ejes horizontal (azimut) y vertical (elevación).
 
@@ -16,7 +16,7 @@ El sistema resuelve el problema de la pérdida de eficiencia en paneles solares 
   - 1x Arduino Uno R3 (ATmega328P).
   - 2x Servomotores SG90 o MG996R para obtener mayor torque.
   - 4x Fotorresistencias (LDR).
-  - Estructura mecánica (madera o impresión 3D).
+  - Estructura mecánica (madera, acrílico o impresión 3D).
 
 *Software y dependencias*
 
@@ -50,7 +50,8 @@ Una vez cargado el código y alimentado el sistema:
 /Seguidor-Solar
 │
 ├── /src                    		  # Código fuente del proyecto
-│   ├── Seguidor_Solar.ino  	      # Archivo principal de código (Arduino)
+│   ├── /Seguidor_solar 	        # Archivo principal de código (Arduino)
+│       └── Seguidor_Solar.ino
 │   └── Codigo.txt               	  #Código en texto plano
 │
 ├── /docs                   		  # Documentación técnica y visual
